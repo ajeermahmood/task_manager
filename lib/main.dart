@@ -1,19 +1,27 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tdd_task_manager/features/task_manager/business_logic/task_bloc.dart';
+import 'package:tdd_task_manager/features/task_manager/presentation/pages/task_page.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      title: 'Task Manager',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        useMaterial3: true,
+      ),
+      home: BlocProvider(
+        create: (context) => TaskBloc(),
+        child: const TaskPage(),
       ),
     );
   }
